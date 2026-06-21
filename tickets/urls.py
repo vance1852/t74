@@ -3,12 +3,15 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from .views import (
+    BundleViewSet,
+    DiscountViewSet,
     LoginView,
     OrderViewSet,
     PerformanceViewSet,
     ShowViewSet,
     dashboard_stats,
     me,
+    price_calculate,
 )
 
 
@@ -20,12 +23,15 @@ router = DefaultRouter(trailing_slash=False)
 router.register("shows", ShowViewSet)
 router.register("performances", PerformanceViewSet)
 router.register("orders", OrderViewSet)
+router.register("bundles", BundleViewSet)
+router.register("discounts", DiscountViewSet)
 
 urlpatterns = [
     path("health", health),
     path("auth/login", LoginView.as_view()),
     path("auth/me", me),
     path("dashboard/stats", dashboard_stats),
+    path("price/calculate", price_calculate),
 ]
 
 urlpatterns += router.urls
